@@ -1,0 +1,204 @@
+{
+  "stripe_checkout_session_response": {
+    "description": "Complete structure of what Stripe returns when creating a checkout session",
+    "example_response": {
+      "id": "cs_test_1234567890abcdef",
+      "object": "checkout.session",
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 2000,
+      "amount_total": 2000,
+      "automatic_tax": {
+        "enabled": false,
+        "status": null
+      },
+      "billing_address_collection": null,
+      "cancel_url": null,
+      "client_reference_id": null,
+      "client_secret": "cs_test_1234567890abcdef_secret_xyz789",
+      "consent": null,
+      "consent_collection": null,
+      "created": 1640995200,
+      "currency": "usd",
+      "currency_conversion": null,
+      "custom_fields": [],
+      "custom_text": {
+        "shipping_address": null,
+        "submit": null,
+        "terms_of_service_acceptance": null
+      },
+      "customer": null,
+      "customer_creation": "if_required",
+      "customer_email": "customer@example.com",
+      "customer_update": null,
+      "expires_at": 1640998800,
+      "invoice": null,
+      "invoice_creation": {
+        "enabled": false,
+        "invoice_data": {
+          "account_tax_ids": null,
+          "custom_fields": null,
+          "description": null,
+          "footer": null,
+          "metadata": {},
+          "rendering_options": null
+        }
+      },
+      "livemode": false,
+      "locale": null,
+      "metadata": {
+        "to_user": "username123",
+        "custom_field": "custom_value"
+      },
+      "mode": "payment",
+      "payment_intent": "pi_1234567890abcdef",
+      "payment_link": null,
+      "payment_method_collection": "always",
+      "payment_method_configuration": null,
+      "payment_method_options": {},
+      "payment_method_types": ["card"],
+      "payment_status": "unpaid",
+      "phone_number_collection": {
+        "enabled": false
+      },
+      "recovered_from": null,
+      "setup_intent": null,
+      "shipping_address_collection": null,
+      "shipping_options": [],
+      "status": "open",
+      "submit_type": null,
+      "subscription": null,
+      "success_url": "https://example.com/success",
+      "total_details": {
+        "amount_discount": 0,
+        "amount_shipping": 0,
+        "amount_tax": 0
+      },
+      "ui_mode": "embedded",
+      "url": null
+    },
+    "key_fields_explanation": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the checkout session",
+        "example": "cs_test_1234567890abcdef",
+        "usage": "Use as orderId in your database"
+      },
+      "client_secret": {
+        "type": "string", 
+        "description": "Client secret for embedded checkout",
+        "example": "cs_test_1234567890abcdef_secret_xyz789",
+        "usage": "Return this to frontend for embedded checkout"
+      },
+      "amount_total": {
+        "type": "integer",
+        "description": "Total amount in cents",
+        "example": 2000,
+        "usage": "Convert to dollars: amount_total / 100"
+      },
+      "amount_subtotal": {
+        "type": "integer",
+        "description": "Subtotal before taxes and fees in cents",
+        "example": 2000,
+        "usage": "Base amount before additional charges"
+      },
+      "currency": {
+        "type": "string",
+        "description": "Three-letter ISO currency code",
+        "example": "usd",
+        "usage": "Store in database for payment record"
+      },
+      "payment_status": {
+        "type": "string",
+        "description": "Current payment status",
+        "possible_values": ["paid", "unpaid", "no_payment_required"],
+        "usage": "Track payment completion"
+      },
+      "status": {
+        "type": "string",
+        "description": "Session status",
+        "possible_values": ["open", "complete", "expired"],
+        "usage": "Track session lifecycle"
+      },
+      "customer_email": {
+        "type": "string",
+        "description": "Customer's email address",
+        "example": "customer@example.com",
+        "usage": "Store for customer records"
+      },
+      "payment_intent": {
+        "type": "string",
+        "description": "Payment intent ID if created",
+        "example": "pi_1234567890abcdef",
+        "usage": "Use as stripePaymentIntentId in database"
+      },
+      "metadata": {
+        "type": "object",
+        "description": "Custom key-value pairs",
+        "example": {"to_user": "username123"},
+        "usage": "Store custom data like recipient username"
+      },
+      "created": {
+        "type": "integer",
+        "description": "Unix timestamp when session was created",
+        "example": 1640995200,
+        "usage": "Convert to Date object for timestamps"
+      },
+      "expires_at": {
+        "type": "integer",
+        "description": "Unix timestamp when session expires",
+        "example": 1640998800,
+        "usage": "Check if session is still valid"
+      },
+      "ui_mode": {
+        "type": "string",
+        "description": "UI mode for checkout",
+        "possible_values": ["hosted", "embedded"],
+        "usage": "Confirms embedded checkout mode"
+      },
+      "mode": {
+        "type": "string",
+        "description": "Payment mode",
+        "possible_values": ["payment", "setup", "subscription"],
+        "usage": "Confirms one-time payment mode"
+      }
+    },
+    "database_mapping": {
+      "orderId": "id",
+      "stripePaymentIntentId": "payment_intent",
+      "amount": "amount_total / 100",
+      "currency": "currency",
+      "status": "payment_status",
+      "billingEmail": "customer_email",
+      "metadata": "JSON.stringify(metadata)"
+    },
+    "common_use_cases": {
+      "create_payment_record": {
+        "description": "Save payment to database when session is created",
+        "fields_needed": ["id", "payment_intent", "amount_total", "currency", "customer_email"]
+      },
+      "update_payment_status": {
+        "description": "Update payment status when webhook is received",
+        "fields_needed": ["id", "payment_status", "payment_intent"]
+      },
+      "handle_success": {
+        "description": "Process successful payment completion",
+        "fields_needed": ["id", "payment_status", "amount_total", "customer_email"]
+      }
+    },
+    "error_handling": {
+      "common_errors": {
+        "invalid_request_error": "Invalid parameters provided",
+        "card_error": "Card was declined",
+        "rate_limit_error": "Too many requests",
+        "authentication_error": "Invalid API key"
+      },
+      "error_response_structure": {
+        "type": "string",
+        "code": "string",
+        "message": "string",
+        "param": "string"
+      }
+    }
+  }
+}
