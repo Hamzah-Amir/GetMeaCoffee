@@ -54,7 +54,7 @@ const page = () => {
             <section className="max-w-5xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
                 <aside className="md:col-span-1 bg-white p-6 rounded-lg shadow-sm">
                     <h2 className="text-xl font-semibold">Quick Facts</h2>
-                    <p className="mt-3 text-sm text-slate-600">This page is intentionally simple and educational — useful as a learning artifact for my "sigma" web development practice.</p>
+                    <p className="mt-3 text-sm text-slate-600">This page is intentionally simple and educational — useful as a learning artifact for my &quot;sigma&quot; web development practice.</p>
 
                     <ul className="mt-4 space-y-2 text-sm">
                         <li><strong>Focus:</strong> Performance, accessibility, simplicity</li>
