@@ -43,10 +43,10 @@ const PaymentPage = ({ params }) => {
     return (
         <>
             <div className='relative w-full'>
-                <img className='object-cover w-full h-[45vh]' src={currentUser.coverpic} alt="" />
-                <div className='absolute -bottom-10 size-36 overflow-hidden border-2 rounded-full bg-white left-[45.5%]'>
+                <img className='object-cover w-full h-48 md:h-[45vh]' src={currentUser.coverpic} alt="" />
+                <div className='absolute -bottom-10 size-28 md:size-36 overflow-hidden border-2 rounded-full bg-white left-[40%] md:left-[45.5%]'>
                     <img
-                        className='rounded-full object-cover size-36'
+                        className='rounded-full object-cover size-28 md:size-36'
                         width={150}
                         height={150}
                         quality={50}
@@ -69,8 +69,8 @@ const PaymentPage = ({ params }) => {
                 <div className="social flex gap-1">
                     <img className='invert-10' src="/insta.svg" alt="hh" />
                 </div>
-                <div className="payment gap-2 flex mt-10 max-w-[80vw]">
-                    <div className="supporters w-1/2 rounded-lg bg-slate-900 px-10 py-5">
+                <div className="payment gap-2 flex flex-col-reverse md:flex-row mt-10 max-w-[80vw]">
+                    <div className="supporters w-full md:w-1/2 rounded-lg bg-slate-900 px-10 py-5">
                         {/* Show list of all supporters */}
                         <h2 className='Supporters my-5 text-2xl font-bold'>Supporters</h2>
                         <ul className='mx-2'>
@@ -107,7 +107,7 @@ const PaymentPage = ({ params }) => {
 
                         </ul>
                     </div>
-                    <div className="makepayment w-1/2 bg-slate-900 p-10">
+                    <div className="makepayment w-full md:w-1/2 bg-slate-900 p-10">
                         <h2 className='text-2xl font-bold mb-8'>Make a Payment</h2>
                         <div className='flex items-center gap-4'>
                             {/* Input for Name and message */}
@@ -122,12 +122,12 @@ const PaymentPage = ({ params }) => {
                             </button>
                         </div>
                         {/* Or choose from these Amount  */}
-                        <div className='flex flex-row items-center  gap-4 mx-[6.5vw] mt-5'>
+                        <div className='flex flex-row items-center mx-auto  gap-4 md:mx-[6.5vw] mt-5'>
                             <button onClick={() => pay(10000)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $10</button>
                             <button onClick={() => pay(20)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>  pay $20 </button>
                             <button onClick={() => pay(30)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'> pay $30 </button>
                             <button onClick={() => pay(40)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $40</button>
-                            <button onClick={() => pay(50)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $50 </button>
+
                         </div>
                     </div>
                 </div>
