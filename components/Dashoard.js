@@ -38,7 +38,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className='container mx-auto py-5'>
+      <div className='container mx-auto py-5 px-6'>
         <h1 className='text-center font-bold text-3xl mb-10'>Welcome to your Dashboard</h1>
         <form className='mx-auto max-w-2xl' onSubmit={handleSubmit}>
           {/* Input for name */}

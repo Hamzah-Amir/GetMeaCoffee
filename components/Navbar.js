@@ -8,22 +8,21 @@ import { useRouter } from 'next/navigation';
 const Navbar = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session)
   const [showdropdown, setshowdropdown] = useState(false)
 
   return (
-    <nav className='flex justify-between items-center p-4 bg-slate-950 text-white'>
+    <nav className='flex gap-4 justify-between  items-center p-4 bg-slate-950 md:h-16 flex-col md:flex-row text-white'>
       <Link href="/">
-        <div className="logo gap-2 font-bold text-2xl flex items-center justify-center mx-2">
+        <div className=" logo gap-2 font-bold text-2xl flex items-center justify-center mx-2">
           <img src="coffee.gif" className='invert-100' width={50} alt="" />
           <span className='mt-3'>Get Me a Coffee</span>
         </div>
       </Link>
 
-      <div className='flex items-center justify-center gap-2 relative mr-4'>
+      <div className='flex items-center justify-center gap-2 mx-6 md:mx-0 relative mr-4'>
         {session && <> <button id="dropdownDefaultButton" onBlur={()=> setTimeout(() => {
           setshowdropdown(false)
-        }, 500)} onClick={() => setshowdropdown(!showdropdown)} data-dropdown-toggle="dropdown" className="text-white cursor-pointer mb-[8px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Welcome {session.user.email} <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        }, 500)} onClick={() => setshowdropdown(!showdropdown)} data-dropdown-toggle="dropdown" className="text-white cursor-pointer mb-[8px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button"><p className='text-[8px] md:text-base'>Welcome {session.user.email} </p><svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
         </svg>
         </button>
@@ -51,7 +50,7 @@ const Navbar = () => {
         </Link>}
         {session && <Link href="/login">
           <button onClick={()=> signOut({callbackUrl:'/login'})} className='cursor-pointer text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-xl text-sm px-5 py-2.5 text-center me-2 mb-2'>
-            Log Out
+           <p className='text-[8px] md:text-base'> Log Out</p>
           </button>
         </Link>}
       </div>
