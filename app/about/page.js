@@ -13,11 +13,11 @@ const page = () => {
     ]
 
     return (
-        <main className="min-h-screen bg-slate-50 text-slate-900">
+        <main className="min-h-screen bg-slate-50  text-slate-900">
             {/* Hero / header */}
             <section
                 className="relative bg-center bg-cover"
-                style={{ backgroundImage: "url('/cover.jpg')" }}
+                // style={{ backgroundImage: "url('/cover.jpg')" }}
                 aria-label="Cover image header"
             >
                 <div className="bg-black/45">
