@@ -25,3 +25,17 @@ export default async function Username({ params }) {
   )
 
 }
+
+export async function generateMetadata({ params }) {
+  
+  // Fetch user data from the database
+  const user = await prisma.user.findUnique({
+    where: {
+      username: params.username
+    }
+  })
+
+  return {
+    title: user.username + " - Get Me a Coffee"
+  }
+}

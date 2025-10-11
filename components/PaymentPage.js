@@ -117,7 +117,7 @@ const PaymentPage = ({ params }) => {
                         {/* Input for Amount */}
                         <div className='flex items-center justify-center gap-4 mt-5'>
                             <input onChange={handleChange} value={paymentform.amount} type="text" placeholder='Enter Amount' name='amount' className='px-4 w-full py-2 rounded-lg bg-slate-800 text-white' />
-                            <button onClick={() => pay(paymentform.amount)} className='cursor-pointer text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-xl text-sm px-6 py-2.5 text-center me-2 mb-2 disabled:opacity-50 disabled:cursor-not-allowed'>
+                            <button onClick={() => pay(paymentform.amount)} className='cursor-pointer text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-xl text-sm px-6 py-2.5 text-center me-2 mb-2 disabled:opacity-50 disabled:bg-slate-900 disabled:from-blue-500 disabled:cursor-not-allowed' disabled={paymentform.name?.length < 3 || paymentform.message?.length < 4 || paymentform.amount <     1}>
                                 Pay
                             </button>
                         </div>

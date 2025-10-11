@@ -7,17 +7,20 @@ import { useEffect } from 'react';
 const Login = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
   useEffect(() => {
+    document.title = "Login - Get Me a Coffee",''
     if (session) {
       router.push(`/dashboard`); // Redirect to dashboard if already logged in
     }
     else {
       router.push('/login')
     }
-  }, [session, router])
+  }, [router, session])
 
 
   return (
+    
     <main className='text-white py-20 container mx-auto'>
       <h1 className='text-3xl text-center font-bold'>Login to Get Your Fans to Support You!</h1>
 
@@ -116,3 +119,7 @@ const Login = () => {
 }
 
 export default Login
+
+const metadata = {
+  title: "Login - Get Me a Coffee"
+}
