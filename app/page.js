@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col items-center justify-center h-[45vh] px-5 md:px-1 text-center text-xs md:text-base text-white">
-        <div className="md:text-3xl flex justify-center items-center mt-6 font-bold text-2xl">Buy me a Coffee <span><img className="invert-100" src="/coffee.gif" width={50} alt="" /></span></div>
+        <div className="md:text-3xl flex justify-center items-center mt-6 font-bold text-2xl">Buy me a Coffee <span>
+          
+          <img className="invert-100" src="/coffee.gif" width={50} alt="" /></span></div>
         <p className="text-lg mt-3">
           A crowdfunding platform for creator. Get funded by your fans and followers. Start now!
         </p>

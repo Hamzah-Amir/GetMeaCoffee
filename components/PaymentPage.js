@@ -77,31 +77,31 @@ const PaymentPage = ({ params }) => {
                             <li className='my-4 flex gap-3 items-center'>
                                 <img src="/avatar.gif" height={30} width={30} alt="user avatar" />
                                 <span>
-                                    Hamza donated <span className='font-bold'>$30</span> with a message "I support you bro, lots of love"
+                                    Hamza donated <span className='font-bold'>$30</span> with a message &quot;I support you bro, lots of love&quot;
                                 </span>
                             </li>
                             <li className='my-4 flex gap-3 items-center'>
                                 <img src="/avatar.gif" height={30} width={30} alt="user avatar" />
                                 <span>
-                                    Hamza donated <span className='font-bold'>$30</span> with a message "I support you bro, lots of love"
+                                    Hamza donated <span className='font-bold'>$30</span> with a message &quot;I support you bro, lots of love&quot;
                                 </span>
                             </li>
                             <li className='my-4 flex gap-3 items-center'>
                                 <img src="/avatar.gif" height={30} width={30} alt="user avatar" />
                                 <span>
-                                    Hamza donated <span className='font-bold'>$30</span> with a message "I support you bro, lots of love"
+                                    Hamza donated <span className='font-bold'>$30</span> with a message &quot;I support you bro, lots of love&quot;
                                 </span>
                             </li>
                             <li className='my-4 flex gap-3 items-center'>
                                 <img src="/avatar.gif" height={30} width={30} alt="user avatar" />
                                 <span>
-                                    Hamza donated <span className='font-bold'>$30</span> with a message "I support you bro, lots of love"
+                                    Hamza donated <span className='font-bold'>$30</span> with a message &quot;I support you bro, lots of love&quot;
                                 </span>
                             </li>
                             <li className='my-4 flex gap-3 items-center'>
                                 <img src="/avatar.gif" height={30} width={30} alt="user avatar" />
                                 <span>
-                                    Hamza donated <span className='font-bold'>$30</span> with a message "I support you bro, lots of love"
+                                    Hamza donated <span className='font-bold'>$30</span> with a message &quot;I support you bro, lots of love&quot;
                                 </span>
                             </li>
 

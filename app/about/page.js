@@ -22,6 +22,8 @@ const page = () => {
             >
                 <div className="bg-black/45">
                     <div className="max-w-5xl mx-auto px-6 py-20 flex items-center gap-6">
+                        {/* eslint-disable @next/next/no-img-element */ }
+
                         <img
                             src="/developer.png"
                             alt="avatar"
