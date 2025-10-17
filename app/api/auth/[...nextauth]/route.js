@@ -2,9 +2,10 @@ import NextAuth from "next-auth"
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
+import { use } from "react"
 
-const prisma = new PrismaClient()
+// const prisma = new PrismaClient()
 
 export const authOptions = {
 
@@ -33,7 +34,7 @@ export const authOptions = {
                     id: profile.sub,
                     name: profile.name,
                     email: profile.email,
-                    image: profile.picture,
+                    profilepic: profile.picture,
                     username: profile.email.split("@")[0]
                 }
             }
@@ -53,6 +54,7 @@ export const authOptions = {
     },
     events: {
         async createUser({ user }) {
+            console.log("USER OBJ",user)
             await prisma.user.update({
                 where: { id: user.id },
                 data: {
