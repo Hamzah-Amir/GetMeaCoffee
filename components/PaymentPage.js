@@ -1,14 +1,16 @@
 "use client"
 import React from 'react'
-import Script from 'next/script'
 import { useState, useEffect } from 'react'
-import { getUser } from '@/actions/useractions'
 import { useRouter } from 'next/navigation'
+import { getUser } from '@/actions/useractions'
+import CheckoutForm from './Checkout'
 import { useSession } from 'next-auth/react'
 
 
 const PaymentPage = ({ params }) => {
+    const router = useRouter()
     const { data: session, status } = useSession()
+    const [clientSecret, setClientSecret] = useState(null)
     const [paymentform, setpaymentform] = useState({
         name: "",
         message: "",
@@ -38,6 +40,22 @@ const PaymentPage = ({ params }) => {
 
     if (status === "loading" || !currentUser) {
         return <div>Loading...</div>
+    }
+
+    const handlePay = async (amountOverride) => {
+        let amountToSend = Number(amountOverride || paymentform.amount)
+        const res = await fetch("/api/payment-form", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: paymentform.name || '', amount: amountToSend || "", message: paymentform.message || ''})
+        })
+
+        const data = await res.json()
+        const clientSecret = data.clientSecret
+        console.log("Data", data)
+        setClientSecret(clientSecret)
     }
 
     return (
@@ -117,21 +135,22 @@ const PaymentPage = ({ params }) => {
                         {/* Input for Amount */}
                         <div className='flex items-center justify-center gap-4 mt-5'>
                             <input onChange={handleChange} value={paymentform.amount} type="text" placeholder='Enter Amount' name='amount' className='px-4 w-full py-2 rounded-lg bg-slate-800 text-white' />
-                            <button onClick={() => pay(paymentform.amount)} className='cursor-pointer text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-xl text-sm px-6 py-2.5 text-center me-2 mb-2 disabled:opacity-50 disabled:bg-slate-900 disabled:from-blue-500 disabled:cursor-not-allowed' disabled={paymentform.name?.length < 3 || paymentform.message?.length < 4 || paymentform.amount <     1}>
+                            <button onClick={() => handlePay()} className='cursor-pointer text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-xl text-sm px-6 py-2.5 text-center me-2 mb-2 disabled:opacity-50 disabled:bg-slate-900 disabled:from-blue-500 disabled:cursor-not-allowed' disabled={paymentform.name?.length < 3 || paymentform.message?.length < 4 || paymentform.amount <     1}>
                                 Pay
                             </button>
                         </div>
                         {/* Or choose from these Amount  */}
                         <div className='flex flex-row items-center mx-auto  gap-4 md:mx-[6.5vw] mt-5'>
-                            <button onClick={() => pay(10000)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $10</button>
-                            <button onClick={() => pay(20)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>  pay $20 </button>
-                            <button onClick={() => pay(30)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'> pay $30 </button>
-                            <button onClick={() => pay(40)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $40</button>
+                            <button onClick={() => handlePay(10000)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $10</button>
+                            <button onClick={() => handlePay(20)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>  pay $20 </button>
+                            <button onClick={() => handlePay(30)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'> pay $30 </button>
+                            <button onClick={() => handlePay(40)} className='bg-slate-800 p-3 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700'>pay $40</button>
 
                         </div>
                     </div>
                 </div>
             </div>
+            { clientSecret && <CheckoutForm clientSecret={clientSecret} />}
         </>
     )
 }

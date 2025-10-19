@@ -46,7 +46,7 @@ export const authOptions = {
             if (session.user) {
                 session.user.id = user.id
                 session.user.username = user.username
-                console.log(session.user) // Add this line to log the session user object
+                // console.log(session.user) // Add this line to log the session user object
             }
             return session
         },
@@ -54,7 +54,7 @@ export const authOptions = {
     },
     events: {
         async createUser({ user }) {
-            console.log("USER OBJ",user)
+            // console.log("USER OBJ",user)
             await prisma.user.update({
                 where: { id: user.id },
                 data: {
