@@ -29,7 +29,7 @@ function PaymentForm() {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:3000/success",
+                return_url: "http://get-me-a-coffee-omega.vercel.app/success",
             },
         });
         if (error.type === "card_error" || error.type === "validation_error") {
